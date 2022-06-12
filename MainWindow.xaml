@@ -1,0 +1,90 @@
+﻿<Window x:Class="Gr2_Sm2_OOP_Lab_13.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Gr2_Sm2_OOP_Lab_13"
+        mc:Ignorable="d"
+        Title="MainWindow" SizeToContent="WidthAndHeight"
+		ResizeMode="NoResize">
+	<Grid>
+		<StackPanel Orientation="Horizontal">
+			<StackPanel Orientation="Vertical">
+				<GroupBox Header="Добавить поезд" Margin="5">
+					<StackPanel Orientation="Vertical" Margin="5">
+						<StackPanel Orientation="Vertical" Margin="5">
+							<DockPanel>
+								<Label  Width="170">Индентификатор</Label>
+								<TextBox Name="NewIdentifierTB" Width="200"></TextBox>
+							</DockPanel>
+							<DockPanel>
+								<Label  Width="170">Место отправления</Label>
+								<TextBox Name="NewDepartPointTB" Width="200"></TextBox>
+							</DockPanel>
+							<DockPanel>
+								<Label  Width="170">Дата и время отправления</Label>
+								<wpfTool:DateTimePicker Name="NewDepartDateTimePK" Width="200"></wpfTool:DateTimePicker>
+							</DockPanel>
+							<DockPanel>
+								<Label Width="170">Место прибытия</Label>
+								<TextBox Name="NewArrivalPointTB"  Width="200"></TextBox>
+							</DockPanel>
+							<DockPanel>
+								<Label Width="170">Дата и время прибытия</Label>
+								<wpfTool:DateTimePicker Name="NewArrivalDateTimePK" Width="200"></wpfTool:DateTimePicker>
+							</DockPanel>
+							<DockPanel>
+								<Label  Width="170">Число мест</Label>
+								<TextBox Name="NewNumOfSeatsTB" Width="200"></TextBox>
+							</DockPanel>
+						</StackPanel>
+						<Button Margin="20" Name="AddRecordBT" Click="AddRecordBT_Click">ДОБАВИТЬ</Button>
+					</StackPanel>
+				</GroupBox>
+				<GroupBox Header="Подобрать поезд" Margin="5">
+					<StackPanel Orientation="Vertical" Margin="5">
+						<StackPanel Orientation="Vertical" Margin="5">
+							<DockPanel>
+								<Label Width="170">Место отправления</Label>
+								<TextBox Name="FindDepartTB" Width="200"></TextBox>
+							</DockPanel>
+							<DockPanel>
+								<Label Width="170">Место назначения</Label>
+								<TextBox Name="FindDestTB" Width="200"></TextBox>
+							</DockPanel>
+							<DockPanel>
+								<Label Width="170">Прибытие, не позднее</Label>
+								<wpfTool:DateTimePicker Name="FindArrivalDateTimePK" Width="200"></wpfTool:DateTimePicker>
+							</DockPanel>
+						</StackPanel>
+						<Button Margin="20" Name="FindRecordBT" Click="FindRecordBT_Click">ПОДОБРАТЬ</Button>
+					</StackPanel>
+				</GroupBox>
+			</StackPanel>
+			<StackPanel Orientation="Vertical" Margin="5">
+				<DataGrid Height="400" 
+				Margin="5"
+				Name="InfoGrid" 
+				HorizontalAlignment="Center" 
+				ItemsSource="{Binding Path=trains,Mode=OneWay,UpdateSourceTrigger=Explicit}"
+				AutoGenerateColumns="False" 
+				IsReadOnly="True">
+					<DataGrid.Columns>
+						<DataGridTextColumn Width="120" Header="Идентификатор" Binding="{Binding Path=TrainIdentifier}"/>
+						<DataGridTextColumn Width="120" Header="Место отправления" Binding="{Binding Path=DeparturePoint}"/>
+						<DataGridTextColumn Width="120" Header="Дата отправления" Binding="{Binding Path=DepartureTime}"/>
+						<DataGridTextColumn Width="120" Header="Место прибытия" Binding="{Binding Path=ArrivalPoint}"/>
+						<DataGridTextColumn Width="120" Header="Дата прибытия" Binding="{Binding Path=ArrivalTime}"/>
+						<DataGridTextColumn Width="120" Header="Свободных мест" Binding="{Binding Path=NumOfFreeSeats}"/>
+					</DataGrid.Columns>
+				</DataGrid>
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+					<Button Width="170" Name="ExportToFileBT" Click="ExportToFileBT_Click" Margin="8">Экспорт в файл</Button>
+					<Button Width="170" Name="ImportFromFileBT" Click="ImportFromFileBT_Click" Margin="8">Импорт из файла</Button>
+					<Button Width="170" Name="DeleteSelectionBT" Click="DeleteSelectionBT_Click" Margin="8">Удалить выделенную запись</Button>
+				</StackPanel>
+			</StackPanel>
+		</StackPanel>
+	</Grid>
+</Window>
